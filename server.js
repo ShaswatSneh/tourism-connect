@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 // Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/tourismDB', {
+mongoose.connect('process.env.MONGO_URL', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -52,9 +52,10 @@ const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
 
 //  to start the server
-app.listen(3000, () => {
-  console.log('🚀 Server running at https://tourism-connect-webportal.onrender.com/');
+app.listen(process.env.PORT || 3000, () => {
+  console.log('🚀 Server running on Render');
 });
+
 
 
 
