@@ -53,8 +53,9 @@ app.use('/auth', authRoutes);
 
 //  to start the server
 app.listen(3000, () => {
-  console.log('🚀 Server running at http://localhost:3000');
+  console.log('🚀 Server running at https://tourism-connect-webportal.onrender.com/');
 });
+
 
 
 
