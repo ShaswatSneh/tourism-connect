@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname));
 
 // Connect to MongoDB
-mongoose.connect('process.env.MONGO_URL', {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -55,6 +55,7 @@ app.use('/auth', authRoutes);
 app.listen(process.env.PORT || 3000, () => {
   console.log('🚀 Server running on Render');
 });
+
 
 
 
