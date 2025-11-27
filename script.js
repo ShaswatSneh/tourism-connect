@@ -7,7 +7,7 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
     message: document.getElementById('message').value
   };
 
-  const res = await fetch('http://localhost:3000/feedback', {
+  const res = await fetch('https://tourism-connect-webportal.onrender.com/feedback', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
@@ -15,4 +15,5 @@ document.getElementById('feedbackForm').addEventListener('submit', async (e) => 
 
   const result = await res.json();
   document.getElementById('response').innerText = result.message;
+
 });
