@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hotels - Tourism Connect</title>
+    <link rel="stylesheet" href="topmenu.css">
+    <link rel="stylesheet" href="hotel.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="locations.html">Tourist Locations</a>
+        <a href="hotels.html">Hotels</a>
+        <a href="budgetcalculator.html">Budget Calculator</a>
+    </nav>
+   <header>
+    <h1>Hotels by Location</h1>
+  </header>
+
+  <div class="hotel-container">
+    <label for="locationSelect">Choose Location:</label>
+    <select id="locationSelect" onchange="showHotels()">
+      <option value="">-- Select --</option>
+      <option value="Maa Dewri Temple">Maa Dewri Temple</option>
+      <option value="Parasnath Hill">Parasnath Hill</option>
+      <option value="Patratu Valley">Patratu Valley</option>
+      <option value="Hundru Falls">Hundru Falls</option>
+      <option value="Rock Garden">Rock Garden</option>
+    </select>
+
+    <div id="hotelsList" class="hotels-list"></div>
+  </div>
+
+<script>
+    // Hotels Data
+    const hotelsData = {
+      "Maa Dewri Temple": [
+        {
+          name: "Hotel Maple Wood",
+          price: 4500,
+          rating: 4.1,
+          address: "Old Hazaribagh Rd Siromtoli Chowk, Ranchi 834001 India",
+          image: "images/hotelmaplewood1.jpg",
+          link: "https://www.makemytrip.com/hotels/hotel-details/?hotelId=201405171841447770&POS=IN-DMeta-PNBDom2&TAAuthorName=MakeMyTrip&TAHotelCode=201405171841447770&_track_param=&_uCurrency=INR&anchor=anchor_1&attrib=click1&checkin=11092025&checkout=11102025&city=CTIXR&cmp=tripadv-MMT_TA_DT_INR_DOM_201405171841447770-meta&country=IN&lat=23.35471&lng=85.33316&locusId=CTIXR&locusType=city&mtkeys=defaultMtkey&priceby=PN&rank=1&roomStayQualifier=2e0e&source=eaf06b44-d99d-49dc-9036-4de22cd70445&topHtlId=201405171841447770&isPropSearch=T"
+        },
+        {
+          name: "Bloom Hotel",
+          price: 4000,
+          rating: 4.4,
+          address: "Kali Babu St, near Jaipal Singh Stadium, Ranchi 834001 India",
+          image: "images/bloomhotel1.jpg",
+          link: "https://www.makemytrip.com/hotels/hotel-details/?hotelId=202312152204574349&POS=IN-DMeta-PNBDom2&TAAuthorName=MakeMyTrip&TAHotelCode=202312152204574349&_track_param=&_uCurrency=INR&anchor=anchor_1&attrib=click1&checkin=11092025&checkout=11102025&city=CTIXR&cmp=tripadv-MMT_TA_DT_INR_DOM_202312152204574349-meta&country=IN&lat=23.37575&lng=85.32258&locusId=CTIXR&locusType=city&mtkeys=defaultMtkey&priceby=PN&rank=1&roomStayQualifier=2e0e&source=4f0939f9-def9-4a05-8d4c-09d0f3128cdb&topHtlId=202312152204574349&isPropSearch=T"
+        }
+      ],
+      "Parasnath Hill": [
+        {
+          name: "Sonnesta Grand Hotel & Resort",
+          price: 2500,
+          rating: 4.3,
+          address: "Station Rd, Isri Bazar, Ranchi 825167 India",
+          image: "images/sonnestahotel.jpg",
+          link: "https://www.makemytrip.com/hotels/hotel-details/?hotelId=202208051233379422&Campaign=&_uCurrency=INR&aud=&checkin=10312025&checkout=11012025&city=CTGIR&cmp=googlehoteldfinder_Old_DH_META_Free_usernolist__default_IN_localuniversal_202208051233379422&country=IN&lat=23.98393&lng=86.03343&locusId=CTGIR&locusType=city&mtkeys=2fc00012-1492-4038-a719-e270fa7b179bFriday&rank=1&roomCount=1&roomStayQualifier=2e0e&rsc=1e2e&topHtlId=202208051233379422&totalGuestCount=2&isPropSearch=T"
+        },
+        {
+          name: "Hotel Spot Light",
+          price: 3000,
+          rating: 4.8,
+          address: "NH 114A, Dumri, Jamtara, Ranchi 825106 India",
+          image: "images/hotelspotlight.png",
+          link: "https://www.makemytrip.com/hotels/hotel-details/?hotelId=202308272019424445&Campaign=&_uCurrency=INR&aud=&checkin=10312025&checkout=11012025&city=CTGIR&cmp=googlehoteldfinder_Old_DH_META_Free_usernolist__default_IN_localuniversal_202208051233379422&country=IN&lat=23.99979&lng=85.9994&locusId=CTGIR&locusType=city&mtkeys=2fc00012-1492-4038-a719-e270fa7b179bFriday&rank=2&roomCount=1&roomStayQualifier=2e0e&rsc=1e2e&topHtlId=202208051233379422&totalGuestCount=2"
+        }
+      ],
+      "Patratu Valley": [
+        {
+          name: "Courtyard by Marriott Ranchi",
+          price: 9250,
+          rating: 4.5,
+          address: "Vidyapathi Nagar, Kanke Road, Ranchi 834008 India",
+          image: "images/courtyardmarriott.jpg",
+          link: "https://www.makemytrip.com/hotels/hotel-details/?hotelId=202502201838504609&_uCurrency=INR&cc=IN&checkin=12212025&checkout=12222025&city=CTIXR&country=IN&guid=fc287c99-bd91-483e-967e-8d05dfc7fe31&lat=23.40496&lng=85.31575&locusId=CTIXR&locusType=city&mmPoiTag=POI%7CPatratu%20Valley%7CPOI66900%7C23.41451%7C85.3164578&modifyDates=true&parentHostName=www.makemytrip.com&rank=1&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Patratu%20Valley%2C%20Ranchi&seoDS=true&seoReq=1763260297343&viewType=PREMIUM&mtkeys=undefined"
+        },
+        {
+          name: "Hotel Holiday Home",
+          price: 5081,
+          rating: 3.5,
+          address: "Kanke Road, Chandni Chowk, Ranchi 834008 India",
+          image: "images/holidayhome.jpg",
+          link: "https://www.makemytrip.com/hotels/hotel-details/?hotelId=20141210200436570&_uCurrency=INR&cc=IN&checkin=12212025&checkout=12222025&city=CTIXR&country=IN&guid=fc287c99-bd91-483e-967e-8d05dfc7fe31&lat=23.4118&lng=85.31649&locusId=CTIXR&locusType=city&mmPoiTag=POI%7CPatratu%20Valley%7CPOI66900%7C23.41451%7C85.3164578&modifyDates=true&parentHostName=www.makemytrip.com&rank=3&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Patratu%20Valley%2C%20Ranchi&seoDS=true&seoReq=1763260297343&mtkeys=undefined"
+        }
+      ],
+      "Hundru Falls": [
+        {
+          name: "Jonha Fall Resort",
+          price: 3000,
+          rating: 1.0,
+          address: "Jonha Fall Road near Jonha Fall Park, Ranchi 835103 India",
+          image: "images/jonhafallresort.jpg",
+          link: "https://www.makemytrip.com/hotels/hotel-details/?hotelId=202306300625446702&_uCurrency=INR&cc=IN&checkin=12242025&checkout=12252025&city=CTIXR&country=IN&guid=c566ab8a-1ecd-4cf2-b4ec-5dfba99c6c4a&lat=23.33764&lng=85.60819&locusId=CTIXR&locusType=city&mmPoiTag=POI%7CHundru%20Falls%7CPOI64336%7C23.4508392%7C85.6667986&modifyDates=true&parentHostName=www.makemytrip.com&rank=1&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Hundru%20Falls%2C%20Ranchi&seoDS=true&seoReq=1763569774828&mtkeys=undefined"
+        },
+        {
+          name: "Hotel Bibhuti Vihar",
+          price: 2134,
+          rating: 3.5,
+          address: "Ghatsila NH-33, Jamshedpur 832303 India",
+          image: "images/hotelbibhutivihar.jpg",
+          link: "https://www.makemytrip.com/hotels/hotel_bibhuti_vihar-details-ghatshila.html"
+        }
+      ],
+      "Rock Garden": [
+        {
+          name: "Hotel Akashdeep",
+          price: 1500,
+          rating: 3.7,
+          address: "Mahatma Gandhi Main Road, Upper Bazaar, Ranchi 834001 India",
+          image: "images/hotelakashdeep.jpg",
+          link: "https://www.makemytrip.com/hotels/hotel-details/?hotelId=201401261421391741&_uCurrency=INR&cc=IN&checkin=12242025&checkout=12252025&city=CTIXR&country=IN&guid=a81cfcc6-20f7-4e28-ad6d-6c91dc4bb868&lat=23.36643&lng=85.32415&locusId=CTIXR&locusType=city&mmPoiTag=POI%7CRock%20Garden%2C%20Ranchi%7CPOI67158%7C23.4038472%7C85.3129755&modifyDates=true&parentHostName=www.makemytrip.com&rank=6&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Ranchi&seoDS=true&seoReq=1763572539563&mtkeys=undefined"
+        },
+        {
+          name: "Park Prime hotel",
+          price: 4716,
+          rating: 4.1,
+          address: "Anand Gram Lane 4, Morabadi, Ranchi 834008 India",
+          image: "images/parkprime.jpg",
+          link: "https://www.makemytrip.com/hotels/hotel-details/?hotelId=20141231011327434&_uCurrency=INR&cc=IN&checkin=12242025&checkout=12252025&city=CTIXR&country=IN&guid=a81cfcc6-20f7-4e28-ad6d-6c91dc4bb868&lat=23.3956&lng=85.32949&locusId=CTIXR&locusType=city&mmPoiTag=POI%7CRock%20Garden%2C%20Ranchi%7CPOI67158%7C23.4038472%7C85.3129755&modifyDates=true&parentHostName=www.makemytrip.com&rank=7&roomStayQualifier=2e0e&rsc=1e2e0e&searchText=Ranchi&seoDS=true&seoReq=1763572539563&mtkeys=undefined"
+        }
+      ]
+    };
+
+    // Function to show hotels 
+    function showHotels() {
+      const location = document.getElementById("locationSelect").value;
+      const listDiv = document.getElementById("hotelsList");
+
+      if (!location) {
+        listDiv.innerHTML = "<p>Please select a location.</p>";
+        return;
+      }
+
+      const hotels = hotelsData[location];
+      if (!hotels || hotels.length === 0) {
+        listDiv.innerHTML = "<p>No hotels available for this location.</p>";
+        return;
+      }
+
+      listDiv.innerHTML = hotels.map(hotel => `
+        <div class="hotel-card">
+          <img src="${hotel.image}" alt="${hotel.name}">
+          <h3>${hotel.name}</h3>
+          <p><b>Price:</b> ₹${hotel.price} per night</p>
+          <p><b>Rating:</b> ⭐ ${hotel.rating}</p>
+          <p><b>Address:</b> ${hotel.address}</p>
+          <a href="${hotel.link}" target="_blank" class="hotel-link">View Hotel →</a>
+        </div>
+      `).join("");
+    }
+  </script>
+</body>
+</html>

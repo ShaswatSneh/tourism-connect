@@ -1,0 +1,15 @@
+/* for website background image */
+/* (This only applies background image to the location details pages on clicking their cards.) */
+
+body {
+  background-image: url("images/cardbg.jpg"); 
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover; 
+}
+
+
+
+
+

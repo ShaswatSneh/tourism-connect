@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Budget Calculator - Tourism Connect</title>
+    <link rel="stylesheet" href="topmenu.css">
+    <link rel="stylesheet" href="budget.css">
+    
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="locations.html">Tourist Locations</a>
+        <a href="hotels.html">Hotels</a>
+        <a href="budgetcalculator.html">Budget Calculator</a>
+    </nav>
+    <header>
+        <h1>Calculate your Budget!</h1>
+    </header>
+<div class="budget-calculator">
+  <h2>Trip Budget Calculator</h2>
+  
+  <label>Destination:</label>
+  <select id="destination">
+    <option value="Maa Dewri Temple">Maa Dewri Temple</option>
+    <option value="Patratu Valley">Patratu Valley</option>
+    <option value="Parasnath Hill">Parasnath Hill</option>
+    <option value="Hundru Falls">Hundru Falls</option>
+    <option value="Rock Garden">Rock Garden</option>
+   </select><br><br>
+  
+  <label>Number of Days:</label>
+  <input type="number" id="days" value="1" min="1"><br><br>
+
+  <label>Number of People:</label>
+<input type="number" id="people" value="1" min="1"><br><br>
+
+  
+  <label>Type of Stay:</label>
+  <select id="stay">
+    <option value="budget">Budget</option>
+    <option value="standard">Standard</option>
+    <option value="luxury">Luxury</option>
+  </select><br><br>
+  
+  <button type="button" onclick="calculateBudget()">Calculate</button>
+  
+  <h3 id="result"></h3>
+</div>
+
+<script>
+function calculateBudget() {
+  const destination = document.getElementById("destination").value;
+  const days = parseInt(document.getElementById("days").value);
+  const people = parseInt(document.getElementById("people").value);
+  const stayType = document.getElementById("stay").value;
+
+  // Base cost data for each location (average per person)
+  const rates = {
+    "Maa Dewri Temple":   { travel: 300, food: 400, stay: 800 },
+    "Patratu Valley": { travel: 700, food: 600, stay: 1200 },
+    "Parasnath Hill":   { travel: 600, food: 550, stay: 900 },
+    "Hundru Falls":   { travel: 500, food: 450, stay: 900 },
+    "Rock Garden":   { travel: 200, food: 350, stay: 800 }
+  };
+
+  const multipliers = {
+    budget: 1,
+    standard: 1.5,
+    luxury: 2.5
+  };
+
+  const place = rates[destination];
+  const mult = multipliers[stayType];
+
+  if (!place || !days || !people) {
+    document.getElementById("result").innerText = "Please fill all fields correctly.";
+    return;
+  }
+
+  // multipliers for different stay types
+  const travelCost = place.travel * people * mult;
+  const foodCost   = place.food * days * people * mult;
+  const stayCost   = place.stay * days * people * mult;
+
+  const total = travelCost + foodCost + stayCost;
+
+  document.getElementById("result").innerHTML = `
+    <b>Estimated Trip Cost:</b> ₹${total.toLocaleString("en-IN")}<br>
+    <small>
+      (Stay: ₹${stayCost.toLocaleString("en-IN")}, 
+      Food: ₹${foodCost.toLocaleString("en-IN")}, 
+      Travel: ₹${travelCost.toLocaleString("en-IN")})
+    </small>
+  `;
+}
+</script>
+</body>
+</html>

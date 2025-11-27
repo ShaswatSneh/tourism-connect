@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tourism Connect</title>
+  <link rel="stylesheet" href="topmenu.css">
+  <link rel="stylesheet" href="hero.css">
+  <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="locations.html">Tourist Locations</a>
+    <a href="hotels.html">Hotels</a>
+    <a href="budgetcalculator.html">Budget Calculator</a>
+  </nav>
+
+<!--for the login/register button-->
+
+<button class="reg-login-btn" id="openAuth">Register / Login</button>
+<div id="profileBox" style="
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 18px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+"></div>
+
+
+<!--hero section-->
+  <section class="hero">
+  <div class="hero-content">
+    <h1>Explore the Best Tourist Spots with Us!</h1>
+    <p>Discover beautiful places to visit, hotels to stay and stay on the budget.</p>
+  <a href="locations.html" class="btn">Explore Now</a>
+  </div>
+</section>
+
+  <section>
+    <p style="color: rgb(255, 255, 255);">Share your trip feedback with us!</p>
+  </section>
+
+  <div class="feedback-container">
+  <form id="feedbackForm">
+  <h2 class="form-title">Feedback Form</h2>
+  <input type="text" id="name" placeholder="Your Name" required><br>
+  <input type="email" id="email" placeholder="Your Email" required><br>
+  <textarea id="message" placeholder="Your Message"></textarea><br>
+  <button type="submit">Submit</button>
+</form>
+</div>
+<div id="response"></div>
+<script>
+document.getElementById("feedbackForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
+
+  try {
+    const response = await fetch("http://localhost:3000/feedback",{
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message }),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      document.getElementById("response").textContent = result.message;
+      document.getElementById("feedbackForm").reset();
+    } else {
+      document.getElementById("response").textContent = "Error submitting feedback.";
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    document.getElementById("response").textContent = "Server not responding.";
+  }
+});
+</script>
+
+<!--for the login/register-->
+<script>
+  document.getElementById("openAuth").addEventListener("click", () => {
+    window.location.href = "http://localhost:3000/auth.html";
+  });
+</script>
+
+<!--NEWEST for the session experience after login-->>
+<script>
+const loggedUser = JSON.parse(localStorage.getItem("user"));
+const btn = document.getElementById("openAuth");
+const profileBox = document.getElementById("profileBox");
+
+if (loggedUser) {
+    // to hide login/register button
+    btn.style.display = "none";
+
+    // to show welcome text nd logout button
+    profileBox.innerHTML = `
+        <span>Welcome, ${loggedUser.name}</span>
+        <button id="logoutBtn" class="reg-login-btn">Logout</button>
+    `;
+    profileBox.style.display = "flex";
+}
+
+
+// this for logout handler
+document.addEventListener("click", (e) => {
+    if (e.target.id === "logoutBtn") {
+        localStorage.removeItem("user");
+        window.location.reload();
+    }
+});
+</script>
+</body>
+</html>
+

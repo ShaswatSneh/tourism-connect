@@ -1,0 +1,32 @@
+/*for budget calculator*/
+
+.budget-calculator {
+  width: 350px; 
+  margin: 0 auto;
+  background: #f9f9f9;
+  padding: 20px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px gray;
+}
+button {
+  background: teal;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background: darkcyan;
+}
+
+/* for website background image */
+
+body {
+  background-image: url("images/budgetbg.jpg"); 
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover; 
+}

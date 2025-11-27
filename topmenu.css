@@ -1,0 +1,77 @@
+/* for topmost Menu Bar*/
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f9f9f9;
+}
+
+nav {
+  background: #333;
+  padding: 10px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+section {
+  padding: 20px;
+}
+
+/* only for the text punchlines under the menu in all pages*/
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f8f8f8;
+}
+
+h1 {
+  margin-top: 20px;
+  color: #ffffff;
+}
+
+/*after register/login button added to site itself (on top of bg image on site itself) */
+.reg-login-btn {
+  position: absolute;
+  top: 65px;
+  right: 20px;
+  background: linear-gradient(135deg, #00aaff, #00ddaa);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000; /* used to stay above background image */
+}
+
+.reg-login-btn:hover {
+  opacity: 0.9;
+}
+
+/*for logout button*/
+.logout-btn {
+  position: absolute;
+  top: 65px;
+  right: 20px;
+  background: linear-gradient(135deg, #00aaff, #00ddaa);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.logout-btn:hover {
+  opacity: 0.9;
+}
